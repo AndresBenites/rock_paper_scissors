@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <script>
+        function computerPlay(){
+            num = Math.floor(Math.random()*3);
+            switch(num){
+                case 0:
+                    return "rock";
+                    break;
+                case 1:
+                    return "paper";
+                    break;
+                case 2:
+                    return "scissors";
+            }
+        }
+
+        function playRound(playerSelection, computerSelection){
+            // let playerSelection = prompt("Enter 'rock' 'paper' or 'scissors'");
+            // let computerSelection = computerPick();
+            let result;
+            console.log(`Computer picks ${computerSelection}`);
+            if (playerSelection.toLowerCase() == computerSelection.toLocaleLowerCase()){
+                return `You picked ${playerSelection}, computer picked ${computerSelection}. You tied! Try again!`;
+            } else {
+                switch(playerSelection.toLocaleLowerCase()){
+                    case "rock":
+                        if(computerSelection.toLocaleLowerCase() == "paper"){
+                            result = "lost";
+                        } else {
+                            result = "won";
+                        }
+                        break;
+                    case "paper":
+                        if(computerSelection.toLocaleLowerCase() == "scissors"){
+                            result = "lost";
+                        } else {
+                            result = "won";
+                        }
+                        break;
+                    case "scissors":
+                        if(computerSelection.toLocaleLowerCase() == "rock"){
+                            result = "lost";
+                        } else {
+                            result = "won";
+                        }
+                        break;
+                    default:
+                        result = "error";
+                }
+                if (result == "error") return "You must enter either rock paper or scissors."
+                else return `You picked ${playerSelection}, computer picked ${computerSelection}. You ${result}!`;
+            }
+        }
+
+        function game(){
+            let wins = 0;
+            let losses = 0;
+            let ties = 0;
+            let result;
+            for (i=0; i<5; i++){
+                let playerAnswer = prompt("Enter rock paper or scissors");
+                result = playRound(playerAnswer, computerPlay());
+                console.log(result);
+                if (result.indexOf("won")!=-1) wins ++;
+                else if (result.indexOf("lost")!=-1)losses ++;
+                else if (result.indexOf("tied") !=-1) ties++;
+            }
+            return `Wins: ${wins}. Losses: ${losses}. Ties: ${ties}`;
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
