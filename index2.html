@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" type="text/css" href="index2Styles.css">
+</head>
+
+<body>
+    <center>
+        <form id="viewport">
+            <Lable for="viewport">ROCK PAPER SCISSORS GAME</Lable><br />
+            <div id="buttons">
+                <button type="button" id="rock">Rock</button>
+                <button type="button" id="paper">Paper</button>
+                <button type="button" id="scissors">Scissors</button>
+            </div>
+            <div id="results">
+                <label for="result">Result: </label>
+                <div id="result"></div>
+                <label for="wins">Wins: </label>
+                <div id="wins"></div>
+                <label for="losses">Losses: </label>
+                <div id="losses"></div>
+                <label for="ties">Ties: </label>
+                <div id="ties"></div>
+            </div>
+        </form>
+    </center>
+
+    <script>
+        let win = 0;
+        let loss = 0;
+        let tie = 0;
+        let btns = document.querySelectorAll("button");
+        btns.forEach(e => {
+            e.addEventListener("click", startGame => {
+                document.querySelector("#result").textContent = "";
+                document.querySelector("#result").textContent += (playRound(e.textContent, computerPlay()));
+            })
+        });
+
+
+        function playRound(playerSelection, computerSelection) {
+            let result;
+            let limit = 5;
+            let wins = document.querySelector("#wins");
+            let losses = document.querySelector("#losses");
+            let ties = document.querySelector("#ties");
+
+            if (playerSelection.toLowerCase() === computerSelection.toLocaleLowerCase()) {
+                result = "tied";
+            } else {
+                switch (playerSelection.toLocaleLowerCase()) {
+                    case "rock":
+                        if (computerSelection.toLocaleLowerCase() == "paper") {
+                            result = "lost";
+                        } else {
+                            result = "won";
+                        }
+                        break;
+                    case "paper":
+                        if (computerSelection.toLocaleLowerCase() == "scissors") {
+                            result = "lost";
+                        } else {
+                            result = "won";
+                        }
+                        break;
+                    case "scissors":
+                        if (computerSelection.toLocaleLowerCase() == "rock") {
+                            result = "lost";
+                        } else {
+                            result = "won";
+                        }
+                        break;
+                }
+            }
+            switch (result) {
+                case "won":
+                    win += 1;
+                    break;
+                case "lost":
+                    loss += 1;
+                    break;
+                case "tied":
+                    tie += 1
+                    break;
+            }
+            wins.textContent = win;
+            losses.textContent = loss;
+            ties.textContent = tie;
+
+            function clearScore() {
+                win = 0;
+                loss = 0;
+                tie = 0;
+            }
+            if (win == limit) {
+                clearAll();
+                clearScore();
+                return "GAME OVER! YOU WON!!!"
+
+            } else if (loss == limit) {
+                clearAll();
+                clearScore();
+                return "GAME OVER! YOU LOST!!!!"
+            } else {
+                return `You picked ${playerSelection}, computer picked ${computerSelection}. You ${result}!`;
+            }
+        }
+        function clearAll() {
+            document.querySelector("#wins").textContent = "";
+            document.querySelector("#losses").textContent = "";
+            document.querySelector("#ties").textContent = "";
+        }
+
+        function computerPlay() {
+            num = Math.floor(Math.random() * 3);
+            switch (num) {
+                case 0:
+                    return "Rock";
+                    break;
+                case 1:
+                    return "Paper";
+                    break;
+                case 2:
+                    return "Scissors";
+            }
+        }
+    </script>
+
+    <body>
+
+    </body>
+
+</html>

@@ -1,0 +1,26 @@
+body {
+    background-color: wheat;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#buttons {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 50%;
+    margin: 25px 0px 25px 0px;
+}
+
+#results {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    width: 75%;
+    margin: 25px 0px 25px 0px;
+    padding: 25px;
+    background-color: linen;
+}
+
+#results label{
+    height: 2em;
+}
